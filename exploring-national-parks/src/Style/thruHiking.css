@@ -1,0 +1,146 @@
+/* Responds to the ThruHiking.jsx component */
+.thru-hiking-parent{
+    margin-top: 5.5rem;
+}
+
+.trail-info-button{
+    width: 50%;
+    font-size: 1.5rem;
+    margin: auto;
+    border-radius: 15px;
+}
+
+.trail-info-button:hover {
+    background: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+img{
+    width: 100%;
+}
+
+.thruHiking{
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.trail-info-welcome {
+    position:relative;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.5) 100%, rgba(255,255,255,1) 0%);
+}
+
+.trail-info-welcome #trail-info-title {
+    position: relative;
+    padding: 5rem;
+    color: black;
+    text-align: center;
+}
+
+.trail-info-welcome #info-title{
+    position: relative;
+    padding-top: 5rem;
+    color: black;
+    font-size: 4rem;
+}
+
+.box-1{
+    display: flex;
+    width: 80%;
+}
+
+.hours{
+    width: 40%;
+    margin: 2rem;
+    padding: 0.5rem;
+    flex: 1;
+    border-style: outset;
+    background-color: rgba(255,255,255,0.8);
+}
+
+.hours .hours-list {
+    list-style-type: none;
+}
+
+.thruHiking .activities-list{
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.thruHiking .activity{
+    background-color: rgba(255, 255, 255, 0.8);
+    margin-left: auto;
+    margin-right: auto;
+    width: 10%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+    border-style: outset;
+    text-align: center;
+    font-weight: bold;
+}
+
+.trailDetail{
+    padding: 10px 10px 10px 10px;
+    display: block;
+    position:relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.thruHiking .post-card{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 30%;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border-style: solid;
+}
+
+.learn-more-name{
+    font-weight: bold;
+}
+
+.trail-info-link:link {
+    color: black;
+    text-decoration: none;
+}
+
+.trail-info-link:visited {
+    color: black;
+    text-decoration: none;
+}
+
+.thruHiking .trails{
+    margin-left: auto;
+    margin-right: auto;
+    border-style: dotted;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.thruHiking #activitiesDropdown{
+    color: black;
+}
+
+.all-trails-info-welcome {
+    position:relative;
+    padding: 3rem;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.5) 100%, rgba(255,255,255,1) 0%);
+}
