@@ -29,7 +29,8 @@ img{
 }
 
 .thruHiking{
-    display: inline-block;
+    display: block;
+    width: 100%;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -61,6 +62,56 @@ img{
     width: 80%;
 }
 
+.trail-map{
+    width: 40%;
+    margin: 2rem;
+    padding: 0.5rem;
+    flex: 1;
+    border-style: outset;
+    background-color: rgba(255,255,255,0.8);
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.trail-map img{
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Square frame ensures a square display with black bars as needed */
+.square-frame{
+    width: 100%;
+    max-width: 300px; /* keep small comparable to info column height */
+    aspect-ratio: 1 / 1;
+    background-color: black; /* bars */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Widen slideshow squares without affecting the map square */
+.trail-gallery .square-frame{
+    width: 60%;
+    max-width: none;
+}
+
+.square-frame img{
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* add bars to preserve full image */
+}
+
+/* Ensure the map square fills the full height of the trail-map */
+.trail-map .square-frame{
+    height: 100%;
+    width: auto;
+    max-width: none;
+}
+
 .hours{
     width: 40%;
     margin: 2rem;
@@ -79,6 +130,15 @@ img{
     margin-right: auto;
     display: flex;
     flex-wrap: wrap;
+}
+
+.trail-gallery {
+    margin-top: 1rem;
+}
+
+.trail-gallery .trail-gallery-slide img{
+    width: 100%;
+    height: auto;
 }
 
 .thruHiking .activity{

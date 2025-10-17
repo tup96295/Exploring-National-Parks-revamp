@@ -30,9 +30,10 @@ export const ThruHikingInfo = async (trailCode, page) => {
           states: 'California, Oregon, Washington',
           description: 'The Pacific Crest Trail spans 2,650 miles from Mexico to Canada through California, Oregon, and Washington. It traverses some of the most spectacular and diverse terrain in the United States.',
           length: '2,650 miles',
+          highestPoint: 'Forester Pass, 13,153 feet',
+          lowestPoint: 'Cascade Locks, 140 feet',
           difficulty: 'Very Difficult',
           bestSeason: 'April - October',
-          permitsRequired: 'Yes - Long-distance permit required',
           url: 'https://www.pcta.org/',
           images: [
             { url: trailImages.PCT }
@@ -41,13 +42,19 @@ export const ThruHikingInfo = async (trailCode, page) => {
             { id: 1, name: 'Hiking' },
             { id: 2, name: 'Backpacking' },
             { id: 3, name: 'Wildlife Viewing' },
-            { id: 4, name: 'Photography' }
+            { id: 4, name: 'Photography' },
+            { id: 5, name: 'Sierra Snow Travel' }
           ],
           addresses: [
             {
-              line1: 'Southern Terminus: Campo, CA',
+              line1: 'Southern Terminus',
               city: 'Campo',
               stateCode: 'CA'
+            },
+            {
+              line1: 'Northern Terminus',
+              city: 'Manning Park',
+              stateCode: 'BC'
             }
           ]
         },
@@ -56,11 +63,12 @@ export const ThruHikingInfo = async (trailCode, page) => {
           trailCode: 'AT',
           fullName: 'Appalachian Trail',
           states: 'Georgia, North Carolina, Tennessee, Virginia, West Virginia, Maryland, Pennsylvania, New Jersey, New York, Connecticut, Massachusetts, Vermont, New Hampshire, Maine',
-          description: 'The Appalachian Trail is a 2,190-mile long public footpath that traverses the scenic, wooded, pastoral, wild, and culturally resonant lands of the Appalachian Mountains.',
+          description: 'The Appalachian Trail is a 2,190-mile long public footpath that traverses the mountains, forests, and rivers of the Eastern United States.',
           length: '2,190 miles',
-          difficulty: 'Very Difficult',
+          highestPoint: 'Kuwohi, 6,643 feet',
+          lowestPoint: 'Bear Mountain State Park, 124 feet',
+          difficulty: 'Difficult',
           bestSeason: 'March - October',
-          permitsRequired: 'Yes - Some sections require permits',
           url: 'https://www.appalachiantrail.org/',
           images: [
             { url: trailImages.AT }
@@ -69,13 +77,18 @@ export const ThruHikingInfo = async (trailCode, page) => {
             { id: 1, name: 'Hiking' },
             { id: 2, name: 'Backpacking' },
             { id: 3, name: 'Wildlife Viewing' },
-            { id: 4, name: 'Photography' }
+            { id: 4, name: 'Photography' },
           ],
           addresses: [
             {
-              line1: 'Southern Terminus: Springer Mountain, GA',
+              line1: 'Southern Terminus',
               city: 'Springer Mountain',
               stateCode: 'GA'
+            },
+            {
+              line1: 'Northern Terminus',
+              city: 'Mount Katahdin',
+              stateCode: 'ME'
             }
           ]
         },
@@ -86,9 +99,10 @@ export const ThruHikingInfo = async (trailCode, page) => {
           states: 'New Mexico, Colorado, Wyoming, Idaho, Montana',
           description: 'The Continental Divide Trail is a 3,100-mile long trail that follows the Continental Divide of the Americas along the Rocky Mountains. It is the highest, most challenging, and most remote of the three major long-distance trails.',
           length: '3,100 miles',
+          highestPoint: 'Grays Peak, 14,278 feet',
+          lowestPoint: 'Lordsburg, 4,189 feet',
           difficulty: 'Extremely Difficult',
           bestSeason: 'May - September',
-          permitsRequired: 'Yes - Multiple permits required',
           url: 'https://continentaldividetrail.org/',
           images: [
             { url: trailImages.CDT }
@@ -97,13 +111,19 @@ export const ThruHikingInfo = async (trailCode, page) => {
             { id: 1, name: 'Hiking' },
             { id: 2, name: 'Backpacking' },
             { id: 3, name: 'Wildlife Viewing' },
-            { id: 4, name: 'Photography' }
+            { id: 4, name: 'Photography' },
+            { id: 5, name: 'High-Altitude Trekking' }
           ],
           addresses: [
             {
-              line1: 'Southern Terminus: Crazy Cook Monument, NM',
+              line1: 'Southern Terminus',
               city: 'Crazy Cook Monument',
               stateCode: 'NM'
+            },
+            {
+              line1: 'Northern Terminus',
+              city: 'Chief Mountain',
+              stateCode: 'MT'
             }
           ]
         }

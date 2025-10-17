@@ -11,8 +11,8 @@
 
 export const fetchTrailImage = async (trailName) => {
   try {
-    // Unsplash API endpoint (using demo access key - in production you'd want your own)
-    const accessKey = 'demo'; // This is a demo key, replace with your own Unsplash access key
+    // Unsplash API endpoint
+    const accessKey = 'G3N6GQS9CG18fSyF1QKDULKQlPfnatF1Evd79zgSBF4';
     const query = encodeURIComponent(trailName);
     const url = `https://api.unsplash.com/search/photos?query=${query}&per_page=30&orientation=landscape&client_id=${accessKey}`;
     
@@ -36,6 +36,35 @@ export const fetchTrailImage = async (trailName) => {
   } catch (error) {
     console.error('Error fetching trail image:', error);
     return getFallbackImage(trailName);
+  }
+};
+
+/**
+ * Fetches multiple trail images from Unsplash in a single request
+ * @param {string} trailName - The name of the trail to search for images.
+ * @param {number} maxImages - Maximum number of images to return.
+ * @returns {Promise<string[]>} - A promise that resolves to an array of image URLs.
+ */
+export const fetchTrailImages = async (trailName, maxImages = 12) => {
+  try {
+    const accessKey = 'G3N6GQS9CG18fSyF1QKDULKQlPfnatF1Evd79zgSBF4';
+    const query = encodeURIComponent(trailName);
+    const url = `https://api.unsplash.com/search/photos?query=${query}&per_page=30&orientation=landscape&client_id=${accessKey}`;
+
+    const response = await fetch(url);
+    if (!response.ok) {
+      return getFallbackImages(trailName, maxImages);
+    }
+
+    const data = await response.json();
+    if (data.results && data.results.length > 0) {
+      const images = data.results.map(item => item.urls && (item.urls.regular || item.urls.small)).filter(Boolean);
+      return images.slice(0, maxImages);
+    }
+    return getFallbackImages(trailName, maxImages);
+  } catch (error) {
+    console.error('Error fetching trail images:', error);
+    return getFallbackImages(trailName, maxImages);
   }
 };
 
@@ -66,6 +95,23 @@ const getFallbackImage = (trailName) => {
   const images = fallbackImages[trailName] || fallbackImages['Pacific Crest Trail'];
   const randomIndex = Math.floor(Math.random() * images.length);
   return images[randomIndex];
+};
+
+/**
+ * Provides multiple fallback images when API calls fail
+ * @param {string} trailName - The name of the trail
+ * @param {number} maxImages - Max number of images to return
+ * @returns {string[]} - Array of fallback image URLs
+ */
+const getFallbackImages = (trailName, maxImages) => {
+  const images = [
+    getFallbackImage(trailName),
+    'https://images.unsplash.com/photo-1526481280698-8fcc13fd78a1?w=800&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=800&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1476610182048-b716b8518aae?w=800&h=600&fit=crop'
+  ];
+  return images.slice(0, Math.max(1, Math.min(maxImages, images.length)));
 };
 
 /**

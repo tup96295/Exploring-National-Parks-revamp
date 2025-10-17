@@ -32,7 +32,7 @@ const Navbar = () => {
                     <NavLink to="/ParkPlan">Park Planner</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/ThruHiking">Thru Hiking</NavLink>
+                    <NavLink to="/ThruHiking" reloadDocument>Thru Hiking</NavLink>
                 </li>
             </ul>
         </nav>

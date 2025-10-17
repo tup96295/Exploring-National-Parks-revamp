@@ -8,12 +8,18 @@
 import React, { useState, useEffect } from 'react';
 import { ThruHikingInfo } from '../Functionality/ThruHikingInfo';
 import '../../Style/thruHiking.css';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import { fetchTrailImages } from '../Functionality/TrailImages.js';
 
 function ThruHikingComponent() {
     const [trailsJSON, setTrails] = useState([]);
+    const [trailGallery, setTrailGallery] = useState([]);
     
     var url = new URL(window.location);
     var trailCode = url.searchParams.get("trailCode");
+    // var trailImageParam = url.searchParams.get("img");
     
     useEffect(() => {
         const fetchData = async () => {
@@ -33,6 +39,24 @@ function ThruHikingComponent() {
         fetchData();
     }, [trailCode]);
 
+    useEffect(() => {
+        const loadImages = async () => {
+            try {
+                if (trailCode) {
+                    const selected = trailsJSON && trailsJSON.length === 1 ? trailsJSON[0] : null;
+                    const trailName = selected ? selected.fullName : (trailCode === 'PCT' ? 'Pacific Crest Trail' : trailCode === 'AT' ? 'Appalachian Trail' : 'Continental Divide Trail');
+                    const imgs = await fetchTrailImages(trailName, 12);
+                    setTrailGallery(imgs);
+                } else {
+                    setTrailGallery([]);
+                }
+            } catch (e) {
+                console.error('Error loading trail gallery:', e);
+            }
+        };
+        loadImages();
+    }, [trailCode, trailsJSON]);
+
     if(trailsJSON.length > 1){ //list all the trails
         return (
             <div className="top-padding-info">
@@ -47,7 +71,7 @@ function ThruHikingComponent() {
                     <div className="trails">
                         {trailsJSON?.map((trail) => (
                             <div key={trail.id} className="post-card">
-                            <a className='trail-info-link' href={'ThruHiking?trailCode='+trail.trailCode}>
+                            <a className='trail-info-link' href={'ThruHiking?trailCode='+trail.trailCode+'&img='+encodeURIComponent(trail.images.length !== 0  ? trail.images[0].url : '')}>
                             <div>
                                 <div className="learn-more-dropdown">
                                     <div>
@@ -71,14 +95,19 @@ function ThruHikingComponent() {
             <div className='trail-info'>
                     {trailsJSON?.map((trail) => (
                         <>
-                        <div key={trail.id} className="thruHiking" style={{ backgroundImage: 'url(' + trail.images[0].url + ')', backgroundSize: 'auto' }}>
+                        <div key={trail.id} className="thruHiking">
                             <div className='trail-info-welcome'>
                                 <center>
                                     <h1 id="info-title">{trail.fullName}</h1>
                                     <h2>Trail Information</h2>
-                                    <address>{trail.addresses[0].line1}<br></br>
-                                        {trail.addresses[0].city}, 
-                                        {trail.addresses[0].stateCode}<br></br>
+                                    <address>
+                                        {trail.addresses[0].line1}: {trail.addresses[0].city}, {trail.addresses[0].stateCode}<br></br>
+                                        {trail.addresses[1] ? (
+                                            <>
+                                                {trail.addresses[1].line1}: {trail.addresses[1].city}, {trail.addresses[1].stateCode}
+                                            </>
+                                        ) : null}
+                                        <br></br>
                                     </address>
                                     <br></br>
                                 </center>
@@ -88,13 +117,28 @@ function ThruHikingComponent() {
 
                             <center>
                                 <div className='box-1'>
+                                    <div className='trail-map'>
+                                        {(() => {
+                                            const mapUrl = trail.trailCode === 'PCT'
+                                                ? 'https://www.plumaspinesresort.com/uploads/1/7/6/4/17642609/pct-map_orig.jpg'
+                                                : (trail.trailCode === 'CDT'
+                                                    ? 'https://cdn.shopify.com/s/files/1/0384/0233/files/cdt-map.jpg?v=1581264111'
+                                                    : 'https://cdn.shopify.com/s/files/1/0705/6755/9463/files/314684-800x1082-appalachian-trail_480x480.webp?v=1694443315');
+                                            return (
+                                                <div className='square-frame'>
+                                                    <img src={mapUrl} alt={trail.fullName + ' map'} />
+                                                </div>
+                                            );
+                                        })()}
+                                    </div>
                                     <div className='hours'>
                                         <h1>Trail Details:</h1>
                                         <ul className='hours-list'>
                                             <li>Length: {trail.length}</li>
+                                            <li>Highest Point: {trail.highestPoint}</li>
+                                            <li>Lowest Point: {trail.lowestPoint}</li>
                                             <li>Difficulty: {trail.difficulty}</li>
                                             <li>Best Season: {trail.bestSeason}</li>
-                                            <li>Permits Required: {trail.permitsRequired}</li>
                                         </ul>
                                         <br></br>
                                         <p>{trail.description}</p>
@@ -103,7 +147,21 @@ function ThruHikingComponent() {
                                         <br></br>
                                         <br></br>
                                         <a href='./ThruHiking'><button className="trail-info-button">Return To Trails</button></a>
-                                        <a href={'./ParkPlan?trailCode='+trail.trailCode}><button className="trail-info-button">Plan A Trip</button></a>
+                                        <br></br>
+                                        {trailGallery && trailGallery.length > 0 ? (
+                                            <div className='trail-gallery'>
+                                                <h2>Trail Photos</h2>
+                                                <Slider dots={true} infinite={true} speed={500} slidesToShow={1} slidesToScroll={1} autoplay={true} autoplaySpeed={3000}>
+                                                    {trailGallery.map((img, idx) => (
+                                                        <div key={idx} className='trail-gallery-slide'>
+                                                            <div className='square-frame'>
+                                                                <img src={img} alt={'trail-gallery-'+idx} />
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </Slider>
+                                            </div>
+                                        ) : null}
                                     </div>
                                 </div>
                             </center>
