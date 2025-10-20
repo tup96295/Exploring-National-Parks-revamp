@@ -11,10 +11,13 @@
     display:flex;
     flex-direction: row;
     justify-content: flex-end;
+    position: relative;
 }
 
 .nav-bar ul li{
     font-size: 1.5rem;
+    display: flex;
+    align-items: center;
     &:hover{
         background-color:#a67e46
     }
@@ -29,7 +32,12 @@
 }
 
 .nav-bar .header{
-
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
     &:hover{
         background-color: #3a4937;
     }
@@ -41,12 +49,15 @@
 }
 
 .nav-bar .logo{
-    flex-grow: 2;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 0;
+    bottom: 0;
     display:flex;
     align-items: center;
     justify-content: center;
     &:hover{
         background-color: #3a4937;
     }
-
 }
