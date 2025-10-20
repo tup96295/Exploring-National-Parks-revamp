@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
 import defaultImage from '../../../src/parkImg-default.png';
 
 /**
@@ -33,6 +33,14 @@ const HighlightGallery = () => {
     }
 
     fetchParks();
+  }, []);
+
+  // Load Twitter script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://platform.twitter.com/widgets.js';
+    script.async = true;
+    document.body.appendChild(script);
   }, []);
 
   const getRandomParks = (returnedParks, numParks) => {

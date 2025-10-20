@@ -5,7 +5,6 @@
  * 
  * @returns {JSX.Element} The rendered navigation bar component.
  */
-import React from 'react'
 import { NavLink } from 'react-router-dom'
 import '../Style/navbar.css'
 import tree from './tree.png'
@@ -30,6 +29,11 @@ const Navbar = () => {
                 </li>
                 <li>
                     <NavLink to="/ParkPlan">Park Planner</NavLink>
+                </li>
+
+                 {/* 🐦 New Twitter link (external) */}
+                <li>
+                    <NavLink to="https://twitter.com/NatlParkService">Twitter</NavLink>
                 </li>
             </ul>
         </nav>
