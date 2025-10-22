@@ -31,7 +31,7 @@ const HighlightGallery = () => {
     fetchParks();
   }, []);
 
-  // Load Twitter script once
+  // Load Twitter script for embedding the feed
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://platform.twitter.com/widgets.js';
@@ -39,7 +39,7 @@ const HighlightGallery = () => {
     document.body.appendChild(script);
   }, []);
 
-  // Ensure Twitter widget loads after rendering
+  // Reload Twitter embed if component updates
   useEffect(() => {
     if (window.twttr && window.twttr.widgets) {
       window.twttr.widgets.load();
@@ -85,20 +85,19 @@ const HighlightGallery = () => {
           </div>
         ))}
 
-        {/* 🐦 Temple University Twitter feed slide */}
+        {/* 🐦 Twitter embed timeline */}
         <div className="slide twitter-slide">
           <h2>Latest from Temple University</h2>
-          <div id="twitter-container">
-            <a
-              className="twitter-timeline"
-              data-width="400"
-              data-height="600"
-              data-theme="light"
-              href="https://twitter.com/templeuniv"
-            >
-              Tweets by Temple University
-            </a>
-          </div>
+          <blockquote
+            className="twitter-timeline"
+            data-theme="light"
+            data-chrome="noheader nofooter noborders transparent"
+            data-tweet-limit="1"
+            data-height="200"
+            href="https://twitter.com/templeuniv"
+          >
+            Tweets by Temple University
+          </blockquote>
         </div>
       </Slider>
     </div>
