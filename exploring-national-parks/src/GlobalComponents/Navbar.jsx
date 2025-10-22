@@ -5,7 +5,6 @@
  * 
  * @returns {JSX.Element} The rendered navigation bar component.
  */
-import React from 'react'
 import { NavLink } from 'react-router-dom'
 import '../Style/navbar.css'
 import tree from './tree.png'
