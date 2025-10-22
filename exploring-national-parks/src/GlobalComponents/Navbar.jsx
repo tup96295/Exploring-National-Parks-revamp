@@ -30,10 +30,8 @@ const Navbar = () => {
                 <li>
                     <NavLink to="/ParkPlan">Park Planner</NavLink>
                 </li>
-
-                 {/* 🐦 New Twitter link (external) */}
                 <li>
-                    <NavLink to="https://twitter.com/NatlParkService">Twitter</NavLink>
+                    <NavLink to="/ThruHiking" reloadDocument>Thru Hiking</NavLink>
                 </li>
             </ul>
         </nav>
