@@ -6,7 +6,7 @@ import 'slick-carousel/slick/slick.css';
 import defaultImage from '../../../src/parkImg-default.png';
 
 /**
- * Renders a gallery of highlighted parks and a Twitter news feed.
+ * Renders a gallery of highlighted parks.
  * @module HighlightGallery
  * @memberof HomePage
  * @returns {JSX.Element} The HighlightGallery component.
@@ -31,20 +31,6 @@ const HighlightGallery = () => {
     fetchParks();
   }, []);
 
-  // Load Twitter script for embedding the feed
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://platform.twitter.com/widgets.js';
-    script.async = true;
-    document.body.appendChild(script);
-  }, []);
-
-  // Reload Twitter embed if component updates
-  useEffect(() => {
-    if (window.twttr && window.twttr.widgets) {
-      window.twttr.widgets.load();
-    }
-  }, [highlightedParks]);
 
   const getRandomParks = (returnedParks, numParks) =>
     returnedParks.sort(() => 0.5 - Math.random()).slice(0, numParks);
@@ -63,7 +49,7 @@ const HighlightGallery = () => {
 
   return (
     <div className="gallery">
-      <h1 className="header">Check Out These Parks & News!</h1>
+      <h1 className="header">Check Out These Parks!</h1>
 
       <Slider {...sliderSettings} className="slider">
         {/* 🏞 Park slides */}
@@ -85,20 +71,6 @@ const HighlightGallery = () => {
           </div>
         ))}
 
-        {/* 🐦 Twitter embed timeline */}
-        <div className="slide twitter-slide">
-          <h2>Latest from Temple University</h2>
-          <blockquote
-            className="twitter-timeline"
-            data-theme="light"
-            data-chrome="noheader nofooter noborders transparent"
-            data-tweet-limit="1"
-            data-height="200"
-            href="https://twitter.com/templeuniv"
-          >
-            Tweets by Temple University
-          </blockquote>
-        </div>
       </Slider>
     </div>
   );
